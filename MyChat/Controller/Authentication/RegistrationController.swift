@@ -11,12 +11,13 @@ class RegistrationController: UIViewController {
     // MARK: -  Properties
     
     //change to button
-    private let imagePerfil: UIImageView = {
-       let i = UIImageView()
-        i.image = #imageLiteral(resourceName: "plus_photo").withRenderingMode(.alwaysTemplate)
-        i.tintColor = .white
-        i.setDimensions(height: 120, width: 120)
-        return i
+    private let imagePerfilButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
+        button.tintColor = .white
+        button.setDimensions(height: 120, width: 120)
+        button.addTarget(self, action: #selector(handleLoadImage), for: .touchUpInside)
+        return button
     }()
     
     private lazy var emailContainer: InputContainerView = {
@@ -56,14 +57,14 @@ class RegistrationController: UIViewController {
     }()
     
     
-    private let dontHaveAccountButton: UIButton = {
+    private let alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         let attributedTitle = NSMutableAttributedString(string: "Do you have an account? ", attributes: [.font: UIFont.systemFont(ofSize: 16), .foregroundColor : UIColor.white])
         attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [.font: UIFont.boldSystemFont(ofSize: 16), .foregroundColor : UIColor.white]))
         
         button.setAttributedTitle(attributedTitle, for: .normal)
         
-        button.addTarget(self, action: #selector(handleNewAccount), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleAlreadyAccount), for: .touchUpInside)
         return button
     }()
     
@@ -82,9 +83,9 @@ class RegistrationController: UIViewController {
     }
     
     func configureImage(){
-        view.addSubview(imagePerfil)
-        imagePerfil.centerX(inView: view)
-        imagePerfil.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 10)
+        view.addSubview(imagePerfilButton)
+        imagePerfilButton.centerX(inView: view)
+        imagePerfilButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 10)
     }
     
     func configureInputs(){
@@ -93,20 +94,25 @@ class RegistrationController: UIViewController {
         stack.spacing = 16
         
         view.addSubview(stack)
-        stack.anchor(top: imagePerfil.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+        stack.anchor(top: imagePerfilButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
     }
     
     func configureDontHaveAccount(){
-        view.addSubview(dontHaveAccountButton)
-        dontHaveAccountButton.centerX(inView: view)
-        dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 10)
+        view.addSubview(alreadyHaveAccountButton)
+        alreadyHaveAccountButton.centerX(inView: view)
+        alreadyHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 10)
     }
     
     
     // MARK: -  Actions
     
-    @objc func handleNewAccount(){
+    @objc func handleAlreadyAccount(){
         navigationController?.popViewController(animated: true)
+        
+    }
+    
+    @objc func handleLoadImage(){
+        
         
     }
 }
