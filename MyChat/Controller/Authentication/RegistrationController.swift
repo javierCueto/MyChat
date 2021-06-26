@@ -9,13 +9,15 @@ import UIKit
 
 class RegistrationController: UIViewController {
     // MARK: -  Properties
+    private var viewModel = RegisterViewModel()
     
     //change to button
     private let imagePerfilButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
         button.tintColor = .white
-        button.setDimensions(height: 120, width: 120)
+        button.clipsToBounds = true
+        button.setDimensions(height: 200, width: 200)
         button.addTarget(self, action: #selector(handleLoadImage), for: .touchUpInside)
         return button
     }()
@@ -53,6 +55,7 @@ class RegistrationController: UIViewController {
         button.setHeight(height: 50)
         button.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         button.tintColor = .white
+        button.isEnabled = false
         return button
     }()
     
@@ -76,6 +79,15 @@ class RegistrationController: UIViewController {
     }
     
     // MARK: -  Helpers
+    func checkFormStatus(){
+        if viewModel.formIsValid {
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
+        }else{
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        }
+    }
     func configureUI(){
         configureImage()
         configureDontHaveAccount()
@@ -95,6 +107,11 @@ class RegistrationController: UIViewController {
         
         view.addSubview(stack)
         stack.anchor(top: imagePerfilButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+        
+        emailTextfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        fullNameTextfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        userNameTextfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     
     func configureDontHaveAccount(){
@@ -112,7 +129,37 @@ class RegistrationController: UIViewController {
     }
     
     @objc func handleLoadImage(){
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true, completion: nil)
         
+    }
+    
+    @objc func textDidChange(sender: UITextField){
+       
+        if sender == emailTextfield {
+            viewModel.email = sender.text
+        }else if sender == passwordTextfield{
+            viewModel.password = sender.text
+        }else if sender == userNameTextfield {
+            viewModel.userName = sender.text
+        }else{
+            viewModel.fullName = sender.text
+        }
+        checkFormStatus()
+    }
+}
+
+// MARK: -  UIImagePickerControllerDelegate
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        imagePerfilButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        imagePerfilButton.layer.borderColor = UIColor(white: 1, alpha: 0.7).cgColor
+        imagePerfilButton.layer.borderWidth = 3.0
+        imagePerfilButton.layer.cornerRadius = 200 / 2
+
+        dismiss(animated: true, completion: nil)
         
     }
 }
