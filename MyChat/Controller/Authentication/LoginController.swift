@@ -9,6 +9,8 @@ import UIKit
 
 class LoginController: UIViewController {
     // MARK: -  Properties
+    private var viewModel = LoginViewModel()
+    
     private let iconImage: UIImageView = {
        let iv = UIImageView()
         iv.image = UIImage(systemName: "text.bubble")
@@ -32,8 +34,9 @@ class LoginController: UIViewController {
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setHeight(height: 50)
-        button.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        button.backgroundColor =  #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         button.tintColor = .white
+        button.isEnabled = false
         return button
     }()
     
@@ -60,6 +63,17 @@ class LoginController: UIViewController {
     }
     
     // MARK: -  Helpers
+    func checkFormStatus(){
+        if viewModel.formIsValid {
+            loginButton.isEnabled = true
+            loginButton.backgroundColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
+        }else{
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+        }
+    }
+    
+    
     func configureUI(){
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
@@ -69,10 +83,7 @@ class LoginController: UIViewController {
         configureIcon()
         configureInputs()
         configureDontHaveAccount()
-        
-      
     }
-    
     
     func configureIcon(){
         view.addSubview(iconImage)
@@ -84,9 +95,11 @@ class LoginController: UIViewController {
         let stack = UIStackView(arrangedSubviews: [emailContainerView,passwordContainerView,loginButton])
         stack.axis = .vertical
         stack.spacing = 16
-        
         view.addSubview(stack)
         stack.anchor(top: iconImage.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+        
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     
     func configureDontHaveAccount(){
@@ -101,5 +114,15 @@ class LoginController: UIViewController {
         let controller = RegistrationController()
         navigationController?.pushViewController(controller, animated: true)
         
+    }
+    
+    @objc func textDidChange(sender: UITextField){
+       
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        }else{
+            viewModel.password = sender.text
+        }
+        checkFormStatus()
     }
 }
