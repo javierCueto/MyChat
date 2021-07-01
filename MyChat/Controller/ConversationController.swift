@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 private let reuseIdentifier = "ConversationCell"
 
 class ConversationController: UIViewController {
@@ -40,9 +41,9 @@ class ConversationController: UIViewController {
         view.backgroundColor = .white
         
         configureNavigationBar()
+        authenticationUser()
         
-        let image = UIImage(systemName: "person.circle.fill")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleShowBotton))
+        
     }
     
     func configureNavigationBar(){
@@ -62,12 +63,43 @@ class ConversationController: UIViewController {
         
         
         navigationController?.navigationBar.overrideUserInterfaceStyle = .dark
+        
+        let image = UIImage(systemName: "person.circle.fill")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleShowBotton))
     }
     
+    
+    func logout(){
+        do{
+            try Auth.auth().signOut()
+        }catch {
+            print("error")
+        }
+    }
+    
+    func presentLoginScreen(){
+        DispatchQueue.main.async {
+            let controller = LoginController()
+           //controller.modalPresentationStyle = .fullScreen
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        }
+    }
     // MARK: -  Actions
     
+    
     @objc func handleShowBotton(){
-        print("123tamarindo")
+        logout()
+    }
+    
+    // MARK: -  API
+    func authenticationUser(){
+        if Auth.auth().currentUser?.uid == nil {
+            presentLoginScreen()
+        }else{
+            print("debug: user is logged in. Configure controller")
+        }
     }
 }
 
