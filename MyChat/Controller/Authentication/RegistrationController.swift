@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Firebase
 
 class RegistrationController: UIViewController {
     // MARK: -  Properties
     private var viewModel = RegisterViewModel()
+    private var profileImage : UIImage?
     
     //change to button
     private let imagePerfilButton: UIButton = {
@@ -47,7 +49,7 @@ class RegistrationController: UIViewController {
     private let passwordTextfield = CustomTextFIeld(placeholder: "Password")
     
     
-    private let loginButton: UIButton = {
+    private let signButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Log In", for: .normal)
         button.layer.cornerRadius = 5
@@ -56,6 +58,7 @@ class RegistrationController: UIViewController {
         button.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         button.tintColor = .white
         button.isEnabled = false
+        button.addTarget(self, action: #selector(handleSign), for: .touchUpInside)
         return button
     }()
     
@@ -81,11 +84,11 @@ class RegistrationController: UIViewController {
     // MARK: -  Helpers
     func checkFormStatus(){
         if viewModel.formIsValid {
-            loginButton.isEnabled = true
-            loginButton.backgroundColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
+            signButton.isEnabled = true
+            signButton.backgroundColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
         }else{
-            loginButton.isEnabled = false
-            loginButton.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
+            signButton.isEnabled = false
+            signButton.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         }
     }
     func configureUI(){
@@ -101,7 +104,7 @@ class RegistrationController: UIViewController {
     }
     
     func configureInputs(){
-        let stack = UIStackView(arrangedSubviews: [emailContainer,fullNameContainer,userNameContainer,passwordContainer,loginButton])
+        let stack = UIStackView(arrangedSubviews: [emailContainer,fullNameContainer,userNameContainer,passwordContainer,signButton])
         stack.axis = .vertical
         stack.spacing = 16
         
@@ -122,6 +125,53 @@ class RegistrationController: UIViewController {
     
     
     // MARK: -  Actions
+    
+    @objc func handleSign(){
+        guard let email = emailTextfield.text else {return}
+        guard let fullname = fullNameTextfield.text else {return}
+        guard let username = userNameTextfield.text?.lowercased() else {return}
+        guard let password = passwordTextfield.text else {return}
+        guard let profileImage = profileImage else {return}
+        
+        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else {return}
+        
+        let filename = NSUUID().uuidString
+        
+        let ref = Storage.storage().reference(withPath: "/profile_images/\(filename)")
+        
+        ref.putData(imageData, metadata: nil) { meta, error in
+            if let error = error {
+                print("debug: error al cargar imagen - \(error.localizedDescription)")
+                return
+            }
+            
+            ref.downloadURL { url, error in
+                guard let profileImageURL = url?.absoluteString else {return}
+                
+                Auth.auth().createUser(withEmail: email, password: password) { auth, error in
+                    if let error = error {
+                        print("debug: error en el login - \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    guard let uid = auth?.user.uid else {return}
+                    
+                    let data = ["email" : email, "fullname": fullname, "profileImageUrl" : profileImageURL, "uud": uid, "username": username] as [String : Any]
+                    
+                    Firestore.firestore().collection("users").document(uid).setData(data) { error in
+                        
+                        if let error = error {
+                            print("debug: error al guardar datos del usuario - \(error.localizedDescription)")
+                            return
+                        }
+                        print("datos guardados")
+                        
+                    }
+                    
+                }
+            }
+        }
+    }
     
     @objc func handleAlreadyAccount(){
         navigationController?.popViewController(animated: true)
@@ -154,6 +204,11 @@ class RegistrationController: UIViewController {
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
+        // image validation - move to another function
+        profileImage = image
+        viewModel.image = profileImage
+        checkFormStatus()
+        ///
         imagePerfilButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         imagePerfilButton.layer.borderColor = UIColor(white: 1, alpha: 0.7).cgColor
         imagePerfilButton.layer.borderWidth = 3.0

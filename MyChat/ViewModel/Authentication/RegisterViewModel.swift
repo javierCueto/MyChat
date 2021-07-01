@@ -5,7 +5,7 @@
 //  Created by Javier Cueto on 26/06/21.
 //
 
-import Foundation
+import UIKit
 
 struct RegisterViewModel: AuthenticationProtocol {
     
@@ -13,8 +13,9 @@ struct RegisterViewModel: AuthenticationProtocol {
     var fullName: String?
     var userName: String?
     var password: String?
+    var image: UIImage?
     
     var formIsValid: Bool {
-        return email?.isEmpty == false && fullName?.isEmpty == false && userName?.isEmpty == false && password?.isEmpty == false
+        return email?.isEmpty == false && fullName?.isEmpty == false && userName?.isEmpty == false && password?.isEmpty == false && image != nil
     }
 }
