@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C2D0DECAF475D7FACD015EE /* Pods_MyChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E506C13E9749BA7FF8473B25 /* Pods_MyChat.framework */; };
 		450BA1A126817EF8006DEF6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA1A026817EF8006DEF6F /* AppDelegate.swift */; };
 		450BA1A326817EF8006DEF6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA1A226817EF8006DEF6F /* SceneDelegate.swift */; };
 		450BA1A526817EF8006DEF6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450BA1A426817EF8006DEF6F /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 		451CA5D92686D64D001C4EC8 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451CA5D82686D64D001C4EC8 /* LoginButton.swift */; };
 		451CA5DB26876E2D001C4EC8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451CA5DA26876E2D001C4EC8 /* LoginViewModel.swift */; };
 		451CA5DD26877F76001C4EC8 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451CA5DC26877F76001C4EC8 /* RegisterViewModel.swift */; };
+		451CA5E2268A7C53001C4EC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 451CA5E1268A7C53001C4EC8 /* GoogleService-Info.plist */; };
 		457A5C252682D83E0003DB45 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A5C242682D83E0003DB45 /* LoginController.swift */; };
 		457A5C272682D84B0003DB45 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A5C262682D84B0003DB45 /* RegistrationController.swift */; };
 		457A5C292682DB0C0003DB45 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A5C282682DB0C0003DB45 /* Extensions.swift */; };
@@ -37,11 +39,16 @@
 		451CA5D82686D64D001C4EC8 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		451CA5DA26876E2D001C4EC8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		451CA5DC26877F76001C4EC8 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		451CA5E1268A7C53001C4EC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		457A5C242682D83E0003DB45 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		457A5C262682D84B0003DB45 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		457A5C282682DB0C0003DB45 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		45E8C57E268CFD48000FE497 /* MyChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyChat.entitlements; sourceTree = "<group>"; };
 		45EF6EE6268574B00047AFB1 /* InputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContainerView.swift; sourceTree = "<group>"; };
 		45EF6EE826857BE30047AFB1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		E506C13E9749BA7FF8473B25 /* Pods_MyChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5B1D7EBAAE12384B4A142E8 /* Pods-MyChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyChat.release.xcconfig"; path = "Target Support Files/Pods-MyChat/Pods-MyChat.release.xcconfig"; sourceTree = "<group>"; };
+		F8ED3B36F94B7A8E48E004F5 /* Pods-MyChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyChat.debug.xcconfig"; path = "Target Support Files/Pods-MyChat/Pods-MyChat.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C2D0DECAF475D7FACD015EE /* Pods_MyChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +68,8 @@
 			children = (
 				450BA19F26817EF8006DEF6F /* MyChat */,
 				450BA19E26817EF8006DEF6F /* Products */,
+				F311D53FD4A9CD03C8CD3681 /* Pods */,
+				5CA99D5109194D816DFB5363 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +84,7 @@
 		450BA19F26817EF8006DEF6F /* MyChat */ = {
 			isa = PBXGroup;
 			children = (
+				45E8C57E268CFD48000FE497 /* MyChat.entitlements */,
 				450BA1B926817F39006DEF6F /* Util */,
 				450BA1B826817F31006DEF6F /* API */,
 				450BA1B726817F2A006DEF6F /* Controller */,
@@ -82,6 +93,7 @@
 				450BA1B426817F0B006DEF6F /* Model */,
 				450BA1A026817EF8006DEF6F /* AppDelegate.swift */,
 				450BA1A226817EF8006DEF6F /* SceneDelegate.swift */,
+				451CA5E1268A7C53001C4EC8 /* GoogleService-Info.plist */,
 				450BA1A426817EF8006DEF6F /* ViewController.swift */,
 				450BA1A626817EF8006DEF6F /* Main.storyboard */,
 				450BA1A926817EF9006DEF6F /* Assets.xcassets */,
@@ -158,6 +170,23 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		5CA99D5109194D816DFB5363 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E506C13E9749BA7FF8473B25 /* Pods_MyChat.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F311D53FD4A9CD03C8CD3681 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F8ED3B36F94B7A8E48E004F5 /* Pods-MyChat.debug.xcconfig */,
+				E5B1D7EBAAE12384B4A142E8 /* Pods-MyChat.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -165,9 +194,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 450BA1B126817EF9006DEF6F /* Build configuration list for PBXNativeTarget "MyChat" */;
 			buildPhases = (
+				42F88F283262A825DD76FE4C /* [CP] Check Pods Manifest.lock */,
 				450BA19926817EF8006DEF6F /* Sources */,
 				450BA19A26817EF8006DEF6F /* Frameworks */,
 				450BA19B26817EF8006DEF6F /* Resources */,
+				21CE82D63BB262CD1EBCEC2F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -216,12 +247,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				450BA1AD26817EF9006DEF6F /* LaunchScreen.storyboard in Resources */,
+				451CA5E2268A7C53001C4EC8 /* GoogleService-Info.plist in Resources */,
 				450BA1AA26817EF9006DEF6F /* Assets.xcassets in Resources */,
 				450BA1A826817EF8006DEF6F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		21CE82D63BB262CD1EBCEC2F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyChat/Pods-MyChat-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyChat/Pods-MyChat-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyChat/Pods-MyChat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		42F88F283262A825DD76FE4C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyChat-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		450BA19926817EF8006DEF6F /* Sources */ = {
@@ -383,9 +457,11 @@
 		};
 		450BA1B226817EF9006DEF6F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8ED3B36F94B7A8E48E004F5 /* Pods-MyChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyChat/MyChat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TNSM43P2F3;
 				INFOPLIST_FILE = MyChat/Info.plist;
@@ -402,9 +478,11 @@
 		};
 		450BA1B326817EF9006DEF6F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5B1D7EBAAE12384B4A142E8 /* Pods-MyChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyChat/MyChat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TNSM43P2F3;
 				INFOPLIST_FILE = MyChat/Info.plist;
