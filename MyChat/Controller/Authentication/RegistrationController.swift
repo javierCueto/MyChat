@@ -133,45 +133,17 @@ class RegistrationController: UIViewController {
         guard let password = passwordTextfield.text else {return}
         guard let profileImage = profileImage else {return}
         
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else {return}
+        let registration = RegistrationCredentials(email: email, username: username, fullname: fullname, password: password, profileImage: profileImage)
         
-        let filename = NSUUID().uuidString
-        
-        let ref = Storage.storage().reference(withPath: "/profile_images/\(filename)")
-        
-        ref.putData(imageData, metadata: nil) { meta, error in
+        AuthServices.shared.createNewUser(registrationCredential: registration) { error in
             if let error = error {
-                print("debug: error al cargar imagen - \(error.localizedDescription)")
+                print("debug: error al guardar datos del usuario - \(error.localizedDescription)")
                 return
             }
-            
-            ref.downloadURL { url, error in
-                guard let profileImageURL = url?.absoluteString else {return}
-                
-                Auth.auth().createUser(withEmail: email, password: password) { auth, error in
-                    if let error = error {
-                        print("debug: error en el login - \(error.localizedDescription)")
-                        return
-                    }
-                    
-                    guard let uid = auth?.user.uid else {return}
-                    
-                    let data = ["email" : email, "fullname": fullname, "profileImageUrl" : profileImageURL, "uud": uid, "username": username] as [String : Any]
-                    
-                    Firestore.firestore().collection("users").document(uid).setData(data) { error in
-                        
-                        if let error = error {
-                            print("debug: error al guardar datos del usuario - \(error.localizedDescription)")
-                            return
-                        }
-                        print("datos guardados")
-                        self.dismiss(animated: true, completion: nil)
-                        
-                    }
-                    
-                }
-            }
+            print("datos guardados")
+            self.dismiss(animated: true, completion: nil)
         }
+       
     }
     
     @objc func handleAlreadyAccount(){

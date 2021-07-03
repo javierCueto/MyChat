@@ -131,9 +131,10 @@ class LoginController: UIViewController {
     @objc func handleLogin(){
         guard let email = emailTextField.text else {return}
         guard let password = passwordTextField.text else {return}
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+        
+        AuthServices.shared.logIn(email: email, password: password) { result, error in
             if let error = error {
-                print("debug: error en el login - \(error.localizedDescription)")
+                print("error al iniciar \(error.localizedDescription)")
                 return
             }
             
