@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
     // MARK: -  Properties
@@ -37,6 +38,7 @@ class LoginController: UIViewController {
         button.backgroundColor =  #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         button.tintColor = .white
         button.isEnabled = false
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
     
@@ -124,5 +126,18 @@ class LoginController: UIViewController {
             viewModel.password = sender.text
         }
         checkFormStatus()
+    }
+    
+    @objc func handleLogin(){
+        guard let email = emailTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let error = error {
+                print("debug: error en el login - \(error.localizedDescription)")
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }

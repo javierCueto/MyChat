@@ -165,7 +165,7 @@ class RegistrationController: UIViewController {
                             return
                         }
                         print("datos guardados")
-                        
+                        self.dismiss(animated: true, completion: nil)
                         
                     }
                     
