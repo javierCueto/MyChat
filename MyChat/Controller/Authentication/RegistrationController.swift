@@ -95,6 +95,7 @@ class RegistrationController: UIViewController {
         configureImage()
         configureDontHaveAccount()
         configureInputs()
+        configureNotificationObservers()
     }
     
     func configureImage(){
@@ -117,6 +118,14 @@ class RegistrationController: UIViewController {
         passwordTextfield.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     
+    //fix with scroll to hide
+    func configureNotificationObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
     func configureDontHaveAccount(){
         view.addSubview(alreadyHaveAccountButton)
         alreadyHaveAccountButton.centerX(inView: view)
@@ -125,6 +134,17 @@ class RegistrationController: UIViewController {
     
     
     // MARK: -  Actions
+    @objc func keboardWillShow(){
+        if view.frame.origin.y == 0{
+            self.view.frame.origin.y -= 88
+        }
+    }
+    
+    @objc func keboardWillHide(){
+        if view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
+        }
+    }
     
     @objc func handleSign(){
         guard let email = emailTextfield.text else {return}
@@ -135,7 +155,10 @@ class RegistrationController: UIViewController {
         
         let registration = RegistrationCredentials(email: email, username: username, fullname: fullname, password: password, profileImage: profileImage)
         
+        showLoader(true,withText: "Signing You Up")
+        
         AuthServices.shared.createNewUser(registrationCredential: registration) { error in
+            self.showLoader(false)
             if let error = error {
                 print("debug: error al guardar datos del usuario - \(error.localizedDescription)")
                 return

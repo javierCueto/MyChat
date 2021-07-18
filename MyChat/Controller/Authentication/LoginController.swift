@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import JGProgressHUD
 
 class LoginController: UIViewController {
     // MARK: -  Properties
@@ -132,7 +133,10 @@ class LoginController: UIViewController {
         guard let email = emailTextField.text else {return}
         guard let password = passwordTextField.text else {return}
         
+        showLoader(true, withText: "Loggin in")
+        
         AuthServices.shared.logIn(email: email, password: password) { result, error in
+            self.showLoader(false)
             if let error = error {
                 print("error al iniciar \(error.localizedDescription)")
                 return
