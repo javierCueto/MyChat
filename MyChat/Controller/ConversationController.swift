@@ -13,13 +13,22 @@ class ConversationController: UIViewController {
     // MARK: -  Properties
     private let tableView = UITableView()
     
+    private let newMessageButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .systemBlue
+        button.imageView?.setDimensions(height: 24, width: 24)
+        button.addTarget(self, action: #selector(handleNewMessage), for: .touchUpInside)
+        return button
+    }()
+    
     
     
     // MARK: -  Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        configureTableView()
     }
     
     // MARK: -  Helpers
@@ -42,6 +51,8 @@ class ConversationController: UIViewController {
         
         configureNavigationBar()
         authenticationUser()
+        configureTableView()
+        configureNewMessage()
         
         
     }
@@ -66,6 +77,13 @@ class ConversationController: UIViewController {
         
         let image = UIImage(systemName: "person.circle.fill")
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleShowBotton))
+    }
+    
+    func configureNewMessage(){
+        view.addSubview(newMessageButton)
+        newMessageButton.setDimensions(height: 56, width: 56)
+        newMessageButton.layer.cornerRadius = 56 / 2
+        newMessageButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right:  view.rightAnchor, paddingBottom: 20, paddingRight: 20)
     }
     
     
@@ -93,6 +111,15 @@ class ConversationController: UIViewController {
     @objc func handleShowBotton(){
         logout()
     }
+    
+    @objc func handleNewMessage(){
+        let controller = NewMessageController()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
+    }
+    
+    
     
     // MARK: -  API
     func authenticationUser(){
