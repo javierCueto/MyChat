@@ -31,6 +31,11 @@ class NewMessageController: UITableViewController {
         tableView.rowHeight = 80
     }
     
+    // MARK: -  API
+    func fetchUsers(){
+        Service.fetchUsers()
+    }
+    
     // MARK: -  Actions
     @objc func handleDismissal(){
         
