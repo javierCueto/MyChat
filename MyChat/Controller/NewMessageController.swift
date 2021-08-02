@@ -21,6 +21,11 @@ class NewMessageController: UITableViewController {
         fetchUsers()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
     // MARK: -  Helpers
     func configureUI(){
         configureNavigationBar(withTitle: "New Message", prefersLargeTitles: false)
@@ -51,12 +56,12 @@ class NewMessageController: UITableViewController {
 // MARK: -  DataSource
 extension NewMessageController{
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(users.count)
         return users.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! UserCell
+        cell.user = users[indexPath.row]
         return cell
     }
 }

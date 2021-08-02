@@ -14,6 +14,7 @@ struct Service{
             snapshot?.documents.forEach({ document in
                 let user = User(dictionary: document.data())
                 users.append(user)
+                
             })
             completion(users)
         }
