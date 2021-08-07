@@ -28,6 +28,7 @@
 		457A5C252682D83E0003DB45 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A5C242682D83E0003DB45 /* LoginController.swift */; };
 		457A5C272682D84B0003DB45 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A5C262682D84B0003DB45 /* RegistrationController.swift */; };
 		457A5C292682DB0C0003DB45 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A5C282682DB0C0003DB45 /* Extensions.swift */; };
+		45DD2D4D26BEBA5400DD1523 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD2D4C26BEBA5400DD1523 /* ChatController.swift */; };
 		45EF6EE7268574B00047AFB1 /* InputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF6EE6268574B00047AFB1 /* InputContainerView.swift */; };
 		45EF6EE926857BE30047AFB1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF6EE826857BE30047AFB1 /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
@@ -55,6 +56,7 @@
 		457A5C242682D83E0003DB45 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		457A5C262682D84B0003DB45 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		457A5C282682DB0C0003DB45 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		45DD2D4C26BEBA5400DD1523 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		45E8C57E268CFD48000FE497 /* MyChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyChat.entitlements; sourceTree = "<group>"; };
 		45EF6EE6268574B00047AFB1 /* InputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContainerView.swift; sourceTree = "<group>"; };
 		45EF6EE826857BE30047AFB1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				457A5C232682D82A0003DB45 /* Authentication */,
 				450BA1BA26817F54006DEF6F /* ConversationController.swift */,
 				453D721426ADB65E00EA4C97 /* NewMessageController.swift */,
+				45DD2D4C26BEBA5400DD1523 /* ChatController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				453D721726ADBC3100EA4C97 /* UserCell.swift in Sources */,
 				451CA5D92686D64D001C4EC8 /* LoginButton.swift in Sources */,
 				457A5C272682D84B0003DB45 /* RegistrationController.swift in Sources */,
+				45DD2D4D26BEBA5400DD1523 /* ChatController.swift in Sources */,
 				457A5C252682D83E0003DB45 /* LoginController.swift in Sources */,
 				453D721526ADB65E00EA4C97 /* NewMessageController.swift in Sources */,
 				457A5C292682DB0C0003DB45 /* Extensions.swift in Sources */,
