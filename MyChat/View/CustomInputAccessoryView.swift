@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol CustomInputAccessoryViewDelegate: AnyObject{
+    func inputView(_ inputView: CustomInputAccessoryView, wantsToSend message: String)
+}
+
 class CustomInputAccessoryView: UIView {
     // MARK: -  Properties
-    private let messageInputTextView: UITextView = {
+    weak var delegate: CustomInputAccessoryViewDelegate?
+     let messageInputTextView: UITextView = {
        let tv = UITextView()
         tv.font = UIFont.systemFont(ofSize: 16)
         tv.isScrollEnabled = false
@@ -72,7 +77,8 @@ class CustomInputAccessoryView: UIView {
     
     // MARK: -  Actions
     @objc func handleSendMessage(){
-        
+        guard let text = messageInputTextView.text else {return}
+        delegate?.inputView(self, wantsToSend: text)
     }
     
     @objc func handleInputChange(){

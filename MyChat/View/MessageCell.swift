@@ -9,6 +9,10 @@ import UIKit
 
 class MessageCell: UICollectionViewCell {
     // MARK: -  Properties
+    var message: Message? {
+        didSet {configure()}
+    }
+    
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = .lightGray
@@ -24,7 +28,6 @@ class MessageCell: UICollectionViewCell {
         tv.isScrollEnabled = false
         tv.isEditable = false
         tv.textColor = .white
-        tv.text = "my message are here, where your message -.-?"
         return tv
     }()
     
@@ -58,7 +61,13 @@ class MessageCell: UICollectionViewCell {
     }
     
     // MARK: -  Helpers
-    
+    func configure(){
+        guard let message = message else {return}
+        let viewModel = MessageViewModel(message: message)
+        bubbleContainer.backgroundColor = viewModel.messageBackgroundColor
+        textView.textColor = viewModel.messageTextColor
+        textView.text = message.text
+    }
     
     // MARK: -  Actions
 }
