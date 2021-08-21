@@ -9,11 +9,15 @@ import Firebase
 
 struct Service{
     static func fetchUsers(completion: @escaping([User]) ->Void){
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
         var users = [User]()
         COLLECTION_USERS.getDocuments { snapshot, error in
             snapshot?.documents.forEach({ document in
                 let user = User(dictionary: document.data())
-                users.append(user)
+                if currentUid != user.uid {
+                    users.append(user)
+                }
+                   
                 
             })
             completion(users)
