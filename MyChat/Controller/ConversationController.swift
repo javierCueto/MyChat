@@ -104,7 +104,7 @@ class ConversationController: UIViewController {
     }
     // MARK: -  Actions
     @objc func handleShowBotton(){
-        let controller = ProfileController()
+        let controller = ProfileController(style: .insetGrouped)
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
