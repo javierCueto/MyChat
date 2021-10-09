@@ -28,6 +28,8 @@
 		456205F126B595C0009D84F2 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456205F026B595C0009D84F2 /* Service.swift */; };
 		4566BD51268FE36600274F99 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566BD50268FE36600274F99 /* AuthService.swift */; };
 		4566BD53268FE6B700274F99 /* RegistrationCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566BD52268FE6B700274F99 /* RegistrationCredentials.swift */; };
+		457238BE2711C699002EFACA /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457238BD2711C699002EFACA /* ProfileController.swift */; };
+		457238C02711C7FF002EFACA /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457238BF2711C7FF002EFACA /* ProfileHeader.swift */; };
 		457A5C252682D83E0003DB45 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A5C242682D83E0003DB45 /* LoginController.swift */; };
 		457A5C272682D84B0003DB45 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A5C262682D84B0003DB45 /* RegistrationController.swift */; };
 		457A5C292682DB0C0003DB45 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457A5C282682DB0C0003DB45 /* Extensions.swift */; };
@@ -63,6 +65,8 @@
 		456205F026B595C0009D84F2 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		4566BD50268FE36600274F99 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		4566BD52268FE6B700274F99 /* RegistrationCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCredentials.swift; sourceTree = "<group>"; };
+		457238BD2711C699002EFACA /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		457238BF2711C7FF002EFACA /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		457A5C242682D83E0003DB45 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		457A5C262682D84B0003DB45 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		457A5C282682DB0C0003DB45 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 				45DD2D4E26BEC8AE00DD1523 /* CustomInputAccessoryView.swift */,
 				45DD2D5026C018E900DD1523 /* MessageCell.swift */,
 				453EF09626D1353200EB4576 /* ConversationCell.swift */,
+				457238BF2711C7FF002EFACA /* ProfileHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 				450BA1BA26817F54006DEF6F /* ConversationController.swift */,
 				453D721426ADB65E00EA4C97 /* NewMessageController.swift */,
 				45DD2D4C26BEBA5400DD1523 /* ChatController.swift */,
+				457238BD2711C699002EFACA /* ProfileController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -344,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				457238C02711C7FF002EFACA /* ProfileHeader.swift in Sources */,
 				450BA1A526817EF8006DEF6F /* ViewController.swift in Sources */,
 				45EF6EE7268574B00047AFB1 /* InputContainerView.swift in Sources */,
 				451CA5DB26876E2D001C4EC8 /* LoginViewModel.swift in Sources */,
@@ -358,6 +365,7 @@
 				453EF09926D1388E00EB4576 /* ConversationViewModel.swift in Sources */,
 				451CA5D92686D64D001C4EC8 /* LoginButton.swift in Sources */,
 				457A5C272682D84B0003DB45 /* RegistrationController.swift in Sources */,
+				457238BE2711C699002EFACA /* ProfileController.swift in Sources */,
 				45DD2D4D26BEBA5400DD1523 /* ChatController.swift in Sources */,
 				457A5C252682D83E0003DB45 /* LoginController.swift in Sources */,
 				452509AE26C7F0600059A20D /* Constanst.swift in Sources */,
