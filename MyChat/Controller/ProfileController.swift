@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileController: UITableViewController{
     // MARK: -  Properties
+
     let cellIdentifier = "cellProfile"
     private lazy var height: CGFloat = view.frame.height
     private lazy var width: CGFloat = UIScreen.main.bounds.width
@@ -21,6 +23,7 @@ class ProfileController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        fetchUser() 
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,12 +35,21 @@ class ProfileController: UITableViewController{
     func configureUI(){
         tableView.backgroundColor = .systemBackground
         tableView.tableHeaderView = headerView
+        headerView.delegate =  self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.tableFooterView = UIView()
         tableView.contentInsetAdjustmentBehavior = .never
     }
     
     // MARK: -  Actions
+    
+    // MARK: - API
+    func fetchUser() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        Service.fetchUser(withUid: uid) { user in
+            self.headerView.user = user
+        }
+    }
 }
 
 extension ProfileController {
@@ -50,4 +62,12 @@ extension ProfileController {
         
         return cell
     }
+}
+
+extension ProfileController : ProfileHeaderDelegate{
+    func dismissController() {
+        dismiss(animated: true)
+    }
+    
+    
 }

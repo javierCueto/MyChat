@@ -6,10 +6,19 @@
 //
 
 import UIKit
+import SDWebImage
 
+protocol ProfileHeaderDelegate: AnyObject {
+    func dismissController()
+}
 class ProfileHeader: UIView{
     // MARK: -  Properties
-    
+    var user: User? {
+        didSet{
+            configureDataView()
+        }
+    }
+    weak var delegate: ProfileHeaderDelegate?
     private let dismissButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
@@ -69,7 +78,7 @@ class ProfileHeader: UIView{
     
     func configureGradientLayer(){
         let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemBlue.cgColor, UIColor.cyan.cgColor]
+        gradient.colors = [UIColor.blue.cgColor, UIColor.systemBlue.cgColor]
         gradient.locations = [0,1]
         layer.addSublayer(gradient)
         gradient.frame = bounds
@@ -92,9 +101,17 @@ class ProfileHeader: UIView{
         stackview.anchor(top: profileImageView.bottomAnchor,left: leftAnchor, bottom: bottomAnchor, right: rightAnchor,paddingTop: 20, paddingBottom: 20)
     }
     
+    func configureDataView(){
+        guard let user = user else {return}
+        usernameLabel.text = "@" + user.username
+        fullnameLabel.text = user.fullname
+        guard let url = URL(string: user.profileImageUrl) else {return}
+        profileImageView.sd_setImage(with: url, completed: nil)
+    }
+    
     // MARK: -  Actions
     
     @objc func handleDissmisal(){
-        
+        delegate?.dismissController()
     }
 }
