@@ -8,9 +8,14 @@
 import UIKit
 import Firebase
 
+protocol ProfileControllerDelegate: AnyObject{
+    func handleLogout()
+}
+
 class ProfileController: UITableViewController{
     // MARK: -  Properties
-
+    weak var delegate: ProfileControllerDelegate?
+    
     let cellIdentifier = "cellProfile"
     private lazy var height: CGFloat = view.frame.height
     private lazy var width: CGFloat = UIScreen.main.bounds.width
@@ -43,6 +48,17 @@ class ProfileController: UITableViewController{
         tableView.backgroundColor = .systemGroupedBackground
         footerView.frame = .init(x: 0, y: 0, width: width, height: 100)
         tableView.tableFooterView = footerView
+        footerView.delegate = self
+    }
+    
+    func presentLoginScreen(){
+        DispatchQueue.main.async {
+            let controller = LoginController()
+           //controller.modalPresentationStyle = .fullScreen
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        }
     }
     
     
@@ -57,6 +73,7 @@ class ProfileController: UITableViewController{
     }
 }
 
+// MARK: -  UITableVIewDataSource
 extension ProfileController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ProfileViewModel.allCases.count
@@ -71,13 +88,40 @@ extension ProfileController {
     }
 }
 
+// MARK: -  ProfileHeaderDelegate
 extension ProfileController : ProfileHeaderDelegate{
     func dismissController() {
         dismiss(animated: true)
     }
 }
 
+// MARK: -  ProfileFooterDelegate
+extension ProfileController : ProfileFooterDelegate{
+    func handleLogout() {
+        let alert = UIAlertController(title: nil, message: "Are you sure you want to logout?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Logout", style: .destructive, handler: { _ in
+            self.delegate?.handleLogout()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: -  UITableViewDelegate
 extension ProfileController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let viewModel = ProfileViewModel(rawValue: indexPath.row) else {return}
+        switch viewModel {
+        case .accountInfo:
+            debugPrint(viewModel.description)
+        case .settings:
+            debugPrint(viewModel.description)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()
     }
