@@ -17,6 +17,7 @@ class ProfileController: UITableViewController{
     private let heightHeaderView: CGFloat = 380
     
     private lazy var headerView = ProfileHeader(frame: .init(x: 0, y: 0, width: width, height: heightHeaderView))
+    private var footerView = ProfileFooter()
     
     
     // MARK: -  Life Cycle
@@ -37,10 +38,11 @@ class ProfileController: UITableViewController{
         tableView.tableHeaderView = headerView
         headerView.delegate =  self
         tableView.register(ProfileCell.self, forCellReuseIdentifier: cellIdentifier)
-        tableView.tableFooterView = UIView()
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = 64
         tableView.backgroundColor = .systemGroupedBackground
+        footerView.frame = .init(x: 0, y: 0, width: width, height: 100)
+        tableView.tableFooterView = footerView
     }
     
     
